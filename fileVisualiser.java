@@ -140,7 +140,7 @@ public class fileVisualiser {
 			for(counter=0 ; counter<256 ; counter++){ //bytes has codes = their value
 				String s=""+(char)counter;
 				//System.out.println(s);
-				codes.put(s, new int[]{counter,0,0});
+				codes.put(s, new int[]{counter,0,1});
 			}
 			int c;
 			while (bytes.read(b) == 1) // LZW-ish
@@ -162,7 +162,7 @@ public class fileVisualiser {
 					coded.setRGB(x, y, found[0]);
 					position++;
 				}
-				if(!end)
+				if(codes.size() < 16777216 && !end)
 				{
 					match.append((char)c);
 					codes.put(match.toString(), new int[]{counter,0,match.length()});
@@ -180,23 +180,30 @@ public class fileVisualiser {
 				int[] a=codes.get(k);
 				if (a[1]!=0){ //some codes may not occur
 					double d=(logCodes-Math.log(a[1]*a[2]))/l2;
-					if (d<8){
-						d=d/8-1;
+					d=8/d;
+					
+					int rv=0;
+					int gv=0;
+					int bv=0;
+					
+					if (d < -1.0){// green - teal
+						gv = 255;
+						bv = 255 + (int)(256.0/d);
 					}
-					else{
-						d=1-8/d;
-					} //d (0,1)
-					int color=65280; //green
-					if (d<0) { // low entropy = blue
-						//color += 256*(int)(d*256.0); // substr 0-256 fron green
-						//color -= (int)(d*256.0); //add to blue
-						color += 255*(int)(d*256.0);
+					else if (d < 0.0) { // black - green
+						gv = -(int)(255.0 * d);
 					}
-					else{ //high = red
-						//color -= 256*(int)(d*256.0);
-						//color += 65536*(int)(d*256.0); //add red
-						color += 65280*(int)(d*256.0);
+					else if (d > 1.0){ //v high - yellow - red
+						rv = 255;
+						gv = (int)(256.0/d);
 					}
+					else{ // 0 < d < 1 mid-high = black - yellow
+						rv = (int)(255.0 * d);
+						gv=rv;
+					}
+					
+					int color = 65536 * rv + 256 * gv + bv;
+					
 					codeColors.put(a[0],color); // counter - #alphabet = # added codes = # codes on output
 					}
 			}
@@ -272,7 +279,6 @@ public class fileVisualiser {
 		}
 		
 	System.out.println("Usage: fv mode [width] filename.");
-	//System.out.println(""+args.length+" args given");
 	System.out.println("Modes: a (all), e (randomness of data), v (bytes as values), x (byte values as position; does not use width)");		
 	/*String path="";
 	System.out.println("Input filename (or \"q\" to exit).");
