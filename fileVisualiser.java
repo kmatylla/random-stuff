@@ -180,7 +180,7 @@ public class fileVisualiser {
 				int[] a=codes.get(k);
 				if (a[1]!=0){ //some codes may not occur
 					double d=(logCodes-Math.log(a[1]*a[2]))/l2;
-					d=8/d;
+					d=d/8;
 					
 					int rv=0;
 					int gv=0;
@@ -279,6 +279,7 @@ public class fileVisualiser {
 		}
 		
 	System.out.println("Usage: fv mode [width] filename.");
+	//System.out.println(""+args.length+" args given");
 	System.out.println("Modes: a (all), e (randomness of data), v (bytes as values), x (byte values as position; does not use width)");		
 	/*String path="";
 	System.out.println("Input filename (or \"q\" to exit).");
