@@ -1,7 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -26,42 +25,10 @@ public class fileVisualiser {
 	{
 		file=new File(filename);
 		size=file.length();
-
-		try {
-			bytes=new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		bytes = null;
 		 
 	}
 	
-	void reset()
-	{
-		try {
-			bytes.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			bytes=new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void finalize()
-	{
-		if (bytes!=null){
-			try {
-				bytes.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public void visValue(int width){
 		if (width==0) width=(int) Math.sqrt(size/3);
 		int height=(int)size/(3*width)+1;
@@ -70,6 +37,7 @@ public class fileVisualiser {
 		 int x=0;
 		 int y=0;
 	     try {
+	    	bytes=new FileInputStream(file);
 			while (bytes.read(rgb) == 3) {
 				//System.out.println(b);
 				img.setRGB(x, y, 65536*fixByte(rgb[0])+255*fixByte(rgb[1])+fixByte(rgb[2]));
@@ -80,13 +48,11 @@ public class fileVisualiser {
 					y++;
 				}
 			 }
+		bytes.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	     finally
-	     {
-	    	 reset();
-	     }
+	     
 	    String path;
 		try {
 			path = file.getCanonicalPath()+".v.png";
@@ -96,27 +62,44 @@ public class fileVisualiser {
 		}
 	}
 	
-	
 
 	public void visXY(){
+		long gb = size / 2;
+		long pos=0;
 		BufferedImage imgx=new BufferedImage(256,256,BufferedImage.TYPE_INT_RGB);
 	     try {
+	    	bytes=new FileInputStream(file);
 	    	int x=0;
+	    	long[][] rc = new long[256][256];
+	    	int[][] gc = new int[256][256];
+	    	int[][] bc = new int[256][256];
 	    	int y=bytes.read();
-			while ((x=bytes.read()) != -1) {
-				int col=imgx.getRGB(x, y);
-				if (col<0) col+=16777216;
-				if (col==0) imgx.setRGB(x, y, 4210752); // gray
-				else imgx.setRGB(x, y, col+65536); //+red
+	    	while ((x=bytes.read()) != -1) {
+	    		rc[x][y]++;
+	    		if (pos < gb && gc[x][y] < 255)
+	    			gc[x][y]++;
+	    		else if (bc[x][y] < 255) bc[x][y] ++;
 				y=x;
-			 }
+				pos++;
+	    	}	  
+			bytes.close();
+
+			long maxr=1;
+			for (x=0;x<256;++x)
+				for (y=0; y<256; ++y)
+				{
+					if (rc[x][y] > maxr)
+						maxr=rc[x][y];
+				}
+			for (x=0;x<256;++x)
+				for (y=0; y<256; ++y)
+				{
+					imgx.setRGB(x,y, 65536 * (int) ((255 * rc[x][y]) / maxr) + 256 * (gc[x][y]) + (bc[x][y]));	
+				}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	     finally
-	     {
-	    	 reset();
-	     }
 	     String path;
 			try {
 				path = file.getCanonicalPath()+".xy.png";
@@ -132,6 +115,7 @@ public class fileVisualiser {
 		BufferedImage coded=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB); //IDK... some varied colors i guess?
 		BufferedImage entropy=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB); //red = compressed is bigger; blue = smaller; log (infty -> 255; 1->0;
 		try {
+			bytes=new FileInputStream(file);
 			boolean end=false;
 			TreeMap <String, int[]> codes = new TreeMap<String, int[]>(); // string -> {code, count, code length}
 			byte[] b=new byte[1];
@@ -169,6 +153,7 @@ public class fileVisualiser {
 					counter++;
 				}
 			}
+			bytes.close();
 				//Huffman-ish
 			TreeMap<Integer,Integer> codeColors = new TreeMap<Integer,Integer>(); //code -> rgb
 			NavigableSet<String> keys = codes.navigableKeySet();
@@ -208,7 +193,7 @@ public class fileVisualiser {
 					}
 			}
 			//System.out.println(codeColors);
-			reset();// make a pic
+			// make a pic
 			int maxPos=position;
 			for (position=0; position<maxPos; position++)
 			{
@@ -221,11 +206,7 @@ public class fileVisualiser {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally
-	     {
-	    	 reset();
-	     }		
+		}	
 		String path;
 		try {
 			if (withCodes){
@@ -278,7 +259,7 @@ public class fileVisualiser {
 			}
 		}
 		
-	System.out.println("Usage: fv mode [width] filename.");
+	System.out.println("Usage: fv.jar mode [width] filename.");
 	//System.out.println(""+args.length+" args given");
 	System.out.println("Modes: a (all), e (randomness of data), v (bytes as values), x (byte values as position; does not use width)");		
 	/*String path="";
