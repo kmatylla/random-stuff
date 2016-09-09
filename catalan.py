@@ -304,27 +304,16 @@ def catalanFromBracketsWord(brk):#not sure it it's correct
             if(brk[i]==")"):
                 deg-=1
             i+=1
-    print brk[0:i],brk[i:]
     return Catalan(catalanFromBracketsWord(brk[0:i]),
                    catalanFromBracketsWord(brk[i:]))
 
-WIDTH, HEIGHT = 500, 500
-surface = cairo.ImageSurface (cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
-ctx = cairo.Context (surface)
-ctx.scale (WIDTH, HEIGHT)
-ctx.set_source_rgb (1,1,1)
-ctx.rectangle(0,0,1,1)
-ctx.fill ()
-ctx.set_source_rgb (0,0,0) # Solid color
-ctx.set_line_width (0.0005)
+
 max=9
 generateCatalan(max)
-c0=catalanFromBrackets("(()())()()(())")
-t=textBracketsWord(c0)
-print t
-c1=catalanFromBracketsWord(t)
-print textBracketsWord(c1)
-print textTreeNr(c1)
-drawBinaryTree(c1,ctx,0,0,1)
-surface.write_to_png ("test.png")
+for i in range (max):
+    for c in Catalan.generated[i]:
+        t=textBracketsWord(c)
+        c0=catalanFromBracketsWord(t)
+        if (not(eq(c,c0))):
+            print t,textBracketsWord(c0)
 print "the end"
