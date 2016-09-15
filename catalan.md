@@ -1,7 +1,6 @@
 Catalan Numbers
-
+====
 [What is this about?!?](http://en.wikipedia.org/wiki/Catalan_numbers)
-=====
 
 Classes
 ------
