@@ -1,4 +1,6 @@
-[Catalan Numbers](http://en.wikipedia.org/wiki/Catalan_numbers)
+Catalan Numbers
+
+[What is this about?!?](http://en.wikipedia.org/wiki/Catalan_numbers)
 =====
 
 Classes
@@ -8,20 +10,19 @@ Classes
 * RTree
 
 ### class BTree
-Simple binary tree, this class is meant to be expanded if necessary.
-Actually the main difference from the Catalan class is that a tree can have a parent.
+Simple binary tree, this class is meant to be expanded if necessary. Actually the main difference from the Catalan class is that a tree can have a parent.
 
 Methods defined here:
 * `__init__(self, l=None, r=None, p=None, isLeft=True)` – constructor.
 
 ### class Catalan
-A class for Catalan numbers and various objects numbered by them.
+A class for Catalan numbers and various objects numbered by them. **This is the important class in this module.**
 
 Methods defined here:
 * `__init__(self, l=None, r=None)` – constructor.
 
 Data and other attributes defined here:
-* `generated` = {} – all already generated objects, see the function `generateCatalan` for more info.
+* `generated` = {} – all already generated objects, see the function [`generateCatalan`](#generatecatalansize) for more info.
 
 ### class RTree
 Methods defined here:
@@ -29,11 +30,13 @@ Methods defined here:
 
 Functions
 ----
-In general: if a thing is named `c`, `c0`, `c1` or similar, it is assumed to be of the class `Catalan`.
+In general: if a thing is named `c`, `c0`, `c1` or similar, it is assumed to be of the class `Catalan`. If it is named `ctx`, it is assumed to be a Cairo context.
 
-If a funcion is not on this list, you probably don't need it since it's a helper for some other funcion. Some funcions (drawing) are for use with the Cairo library.
+When I write simply “object” in this file, I generally mean “object of class `Catalan`”.
 
-Also, I have no experience in writing docomentation, so sorry for all confusion.
+If a funcion is not on this list, you probably don't need it since it's a helper for some other funcion. Also some parameters are just for recurrence and you probably won't need them, so they aren't documented.  Some funcions (drawing) are for use with the Cairo library.
+
+Also, I have little experience in writing docomentation, so sorry for all confusion.
 
 ### add(c1, c2, left=True)
 Concatenate two objects, ie. concatenate mountains.
@@ -47,17 +50,17 @@ Write the binary tree `tree` as parenthesed characters.
 Generate a Catalan object from a binary tree `bt`.
 
 ### catalanFromBrackets(brk)
-Reverse of `textBrackets`.
+Reverse of [`textBrackets`](#textbracketsc).
 
 `brk` – brackets string.
 
 ### catalanFromBracketsWord(brk)
-Reverse of `textBracketsWord`.
+Reverse of [`textBracketsWord`](#textbracketswordc).
 
 `brk` – brackets string.
 
 ### catalanFromPermutation(p)
-Reverse of `textPermutation`.
+Reverse of [`textPermutation`](#textPermutationc).
 
 `p` – permutation; single space-separated.
 
