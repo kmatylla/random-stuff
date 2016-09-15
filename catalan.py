@@ -5,7 +5,9 @@ import math
 class Catalan:
     """A class for Catalan numbers and various objects numbered by them."""
     generated=dict()
+    """A place to keep already generated objects."""
     def __init__(self,l=None,r=None):
+        """Construct from left l and right r."""
         if (l==None):
             ls=0
             self.degl=0
@@ -26,7 +28,9 @@ class Catalan:
 #generate the object up to size
 def generateCatalan(size):
     """ Generate in Catalan.generated a dictionary i -> a list of all objects of size i, for i<= size.
-Eg. Catalan.generated[1] has 1 list member, [2] has 2, [3] has 5, [4] has 14 etc."""
+Eg. Catalan.generated[1] has 1 list member, [2] has 2, [3] has 5, [4] has 14 etc.
+    WARNING: Too large size may make python unresponsive.
+    (For my computer, large = 15 and above.)"""
     #if (size>14):
     #    die("nope.") #kill it. kill it with fire.
     #    #also, don't put above line on github
@@ -82,7 +86,7 @@ def drawBinaryTree(c,ctx,x=0.0,y=0.0,size=0.9):
         drawBinaryTree(c.right,ctx,x+size/2,y+size/2,size/2)
 
 def drawTree(c,ctx,x=0,y=0,size=.9,angle=0):
-    """Draw c as a (nonbinaty) rooted tree onto Cairo context ctx.
+    """Draw c as a (nonbinary) rooted tree onto Cairo context ctx.
     x,y -- topleft corner
     size -- width and height of the drawing are less than size and reasonably close to it
     angle -- 0 means the root is on top; other angle means the tree is rotated (radians)."""
@@ -162,13 +166,14 @@ def drawStairs(c,ctx,x,y,size=.9,step=0):
     ctx.stroke()
 
 #tree numbering
-def textTreeNr(c, plus=1):
-    """Write c as a permutation, eg. 231 based on c as binary tree (preorder).
+def textPermutation(c, plus=1):
+    """Write c as a 312-avoiding permutation, eg. 231.
+    The permutation is based on c as binary tree (preorder).
     plus -- do not use that."""
     if(c==None):
         return ""
-    t=str(textTreeNr(c.left,plus+1))+" "+str(plus)+" "+str(textTreeNr(c.right,plus+c.rootn))
-    return t
+    t=str(textPermutation(c.left,plus+1))+" "+str(plus)+" "+str(textPermutation(c.right,plus+c.rootn))
+    return t.lstrip().rstrip()
 #---
 def eq(c1,c2):
     """Tell if two Catalan objects are equal."""
@@ -264,14 +269,16 @@ def biflip(c, left=True):
     return flipRaised(flip(c),left)
 
 def getIndex(c,col):
-    """Tell, on which position given object is in an array."""
+    """Return the position of a given Catalan object c in an array col or -1.
+    You probably don't need to use that."""
     for i in range(len(col)):
         if (eq(c,col[i])):
             return i
     return -1
 
 def catalanFromBrackets(brk):
-    """Reverse of textBrackets()."""
+    """Reverse of textBrackets().
+    brk -- brackets string."""
     if(brk==""):
         return None
     i=0
@@ -288,8 +295,9 @@ def catalanFromBrackets(brk):
             die("wrong input")
     return Catalan(catalanFromBrackets(brk[1:i]),catalanFromBrackets(brk[i+1:]))
 
-def catalanFromBracketsWord(brk):#not sure it it's correct
-    """Reverse of textBracketsWord()."""
+def catalanFromBracketsWord(brk):
+    """Reverse of textBracketsWord().
+    brk -- brackets string."""
     if(brk=='*'):
         return None
     brk=brk[1:-1] #remove parentheses
@@ -307,13 +315,101 @@ def catalanFromBracketsWord(brk):#not sure it it's correct
     return Catalan(catalanFromBracketsWord(brk[0:i]),
                    catalanFromBracketsWord(brk[i:]))
 
+def catalanFromPermutation(p):
+    """Reverse of textPermutation().
+    p -- permutation; single space-separated."""
+    if(p==""):
+        return None
+    numbers=p.split()
+    l=[]
+    r=[]
+    flag=0
+    i=1
+    for sn in numbers:
+        n=int(sn)
+        if (n==1):
+            flag=i
+        else:
+            if(flag==0):
+                l.append(str(n-1))
+                i+=1
+            else:
+                r.append(str(n-flag))
+    pl=" ".join(l)
+    pr=" ".join(r)
+    return Catalan(catalanFromPermutation(pl),catalanFromPermutation(pr))
 
-max=9
-generateCatalan(max)
-for i in range (max):
-    for c in Catalan.generated[i]:
-        t=textBracketsWord(c)
-        c0=catalanFromBracketsWord(t)
-        if (not(eq(c,c0))):
-            print t,textBracketsWord(c0)
-print "the end"
+class BTree:
+    """Simple binary tree, this class is meant to be expanded if necessary.
+    Actually the main difference from the Catalan class is that a tree can have a parent."""
+    def __init__(self,l=None,r=None,p=None,isLeft=True):
+        self.parent=p
+        self.left=l
+        self.right=r
+        if(p!=None):
+            if(isLeft):
+                p.left=self
+            else:
+                p.right=self
+        if(l!=None):
+            l.parent=self
+        if(r!=None):
+            r.parent=self
+            
+def btToText(tree):
+    """Write the binary tree as parenthesed characters."""
+    if(tree==None):
+        return "*"
+    return "("+btToText(tree.left)+btToText(tree.right)+")"
+
+class RTree:
+    def __init__(self,ch=[],p=None):
+        self.parent=p
+        self.children=ch
+        if(p!=None):
+            p.children.append(self)
+        for t in ch:
+            t.parent=self
+
+def rtToText(tree):
+    """Write the rooted tree as nested parentheses."""
+    if(tree==None):
+        return ""
+    t=""
+    for c in tree.children:
+        t+="("+rtToText(c)+")"
+    return t
+
+def treeBinary(c):
+    """Generate a binary tree structure from c."""
+    if(c==None):
+        return None
+    return BTree(treeBinary(c.left),treeBinary(c.right))
+
+def treeRooted(c):
+    """Generate a rooted tree structure from c."""
+    if(c==None):
+        return RTree()
+    t=RTree([treeRooted(c.left)])
+    if(c.right!=None):
+        tr=treeRooted(c.right)
+        for t0 in tr.children:
+            t.children.append(t0)
+        for t0 in t.children:
+            t0.parent=t
+    return t
+
+def catalanFromBTree(bt):
+    """Generate a Catalan object from a binary tree bt."""
+    if (bt==None):
+        return None
+    return Catalan(catalanFromBTree(bt.left),catalanFromBTree(bt.right))
+
+def catalanFromRTree(rt):
+    """Generate a Catalan object from a rooted tree rt."""
+    if (len(rt.children)==0):
+        return None
+    rtr=RTree(rt.children[1:])
+    lc=catalanFromRTree(rt.children[0])
+    rc=catalanFromRTree(rtr)
+    return Catalan(lc,rc)

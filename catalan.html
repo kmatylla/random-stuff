@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module catalan</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>catalan</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/eri/.git/random-stuff/catalan.py">/home/eri/.git/random-stuff/catalan.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cairo.html">cairo</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="catalan.html#BTree">BTree</a>
+</font></dt><dt><font face="helvetica, arial"><a href="catalan.html#Catalan">Catalan</a>
+</font></dt><dt><font face="helvetica, arial"><a href="catalan.html#RTree">RTree</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BTree">class <strong>BTree</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Simple&nbsp;binary&nbsp;tree,&nbsp;this&nbsp;class&nbsp;is&nbsp;meant&nbsp;to&nbsp;be&nbsp;expanded&nbsp;if&nbsp;necessary.<br>
+Actually&nbsp;the&nbsp;main&nbsp;difference&nbsp;from&nbsp;the&nbsp;<a href="#Catalan">Catalan</a>&nbsp;class&nbsp;is&nbsp;that&nbsp;a&nbsp;tree&nbsp;can&nbsp;have&nbsp;a&nbsp;parent.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BTree-__init__"><strong>__init__</strong></a>(self, l<font color="#909090">=None</font>, r<font color="#909090">=None</font>, p<font color="#909090">=None</font>, isLeft<font color="#909090">=True</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Catalan">class <strong>Catalan</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;for&nbsp;<a href="#Catalan">Catalan</a>&nbsp;numbers&nbsp;and&nbsp;various&nbsp;objects&nbsp;numbered&nbsp;by&nbsp;them.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Catalan-__init__"><strong>__init__</strong></a>(self, l<font color="#909090">=None</font>, r<font color="#909090">=None</font>)</dt><dd><tt>Construct&nbsp;from&nbsp;left&nbsp;l&nbsp;and&nbsp;right&nbsp;r.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>generated</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RTree">class <strong>RTree</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RTree-__init__"><strong>__init__</strong></a>(self, ch<font color="#909090">=[]</font>, p<font color="#909090">=None</font>)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-add"><strong>add</strong></a>(c1, c2, left<font color="#909090">=True</font>)</dt><dd><tt>Concatenate&nbsp;two&nbsp;objects,&nbsp;ie.&nbsp;concatenate&nbsp;mountains.<br>
+left&nbsp;--&nbsp;how&nbsp;are&nbsp;the&nbsp;mountains&nbsp;mapped&nbsp;to&nbsp;objects&nbsp;(do&nbsp;we&nbsp;start&nbsp;from&nbsp;raised&nbsp;mountain&nbsp;on&nbsp;left).</tt></dd></dl>
+ <dl><dt><a name="-biflip"><strong>biflip</strong></a>(c, left<font color="#909090">=True</font>)</dt><dd><tt>Do&nbsp;both&nbsp;flips&nbsp;(useful&nbsp;as&nbsp;a&nbsp;shortcut.</tt></dd></dl>
+ <dl><dt><a name="-btToText"><strong>btToText</strong></a>(tree)</dt><dd><tt>Write&nbsp;the&nbsp;binary&nbsp;tree&nbsp;as&nbsp;parenthesed&nbsp;characters.</tt></dd></dl>
+ <dl><dt><a name="-catalanFromBTree"><strong>catalanFromBTree</strong></a>(bt)</dt><dd><tt>Generate&nbsp;a&nbsp;<a href="#Catalan">Catalan</a>&nbsp;object&nbsp;from&nbsp;a&nbsp;binary&nbsp;tree&nbsp;bt.</tt></dd></dl>
+ <dl><dt><a name="-catalanFromBrackets"><strong>catalanFromBrackets</strong></a>(brk)</dt><dd><tt>Reverse&nbsp;of&nbsp;<a href="#-textBrackets">textBrackets</a>().<br>
+brk&nbsp;--&nbsp;brackets&nbsp;string.</tt></dd></dl>
+ <dl><dt><a name="-catalanFromBracketsWord"><strong>catalanFromBracketsWord</strong></a>(brk)</dt><dd><tt>Reverse&nbsp;of&nbsp;<a href="#-textBracketsWord">textBracketsWord</a>().<br>
+brk&nbsp;--&nbsp;brackets&nbsp;string.</tt></dd></dl>
+ <dl><dt><a name="-catalanFromPermutation"><strong>catalanFromPermutation</strong></a>(p)</dt><dd><tt>Reverse&nbsp;of&nbsp;<a href="#-textPermutation">textPermutation</a>().<br>
+p&nbsp;--&nbsp;permutation;&nbsp;single&nbsp;space-separated.</tt></dd></dl>
+ <dl><dt><a name="-catalanFromRTree"><strong>catalanFromRTree</strong></a>(rt)</dt><dd><tt>Generate&nbsp;a&nbsp;<a href="#Catalan">Catalan</a>&nbsp;object&nbsp;from&nbsp;a&nbsp;rooted&nbsp;tree&nbsp;rt.</tt></dd></dl>
+ <dl><dt><a name="-drawBinaryTree"><strong>drawBinaryTree</strong></a>(c, ctx, x<font color="#909090">=0.0</font>, y<font color="#909090">=0.0</font>, size<font color="#909090">=0.9</font>)</dt><dd><tt>Draw&nbsp;c&nbsp;as&nbsp;a&nbsp;binary&nbsp;tree&nbsp;onto&nbsp;Cairo&nbsp;context&nbsp;ctx.<br>
+x,y&nbsp;--&nbsp;topleft&nbsp;corner<br>
+size&nbsp;--&nbsp;width&nbsp;and&nbsp;height&nbsp;of&nbsp;the&nbsp;drawing&nbsp;are&nbsp;less&nbsp;than&nbsp;size&nbsp;and&nbsp;reasonably&nbsp;close&nbsp;to&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-drawMountain"><strong>drawMountain</strong></a>(c, ctx, x, y, size<font color="#909090">=0.9</font>, step<font color="#909090">=0</font>)</dt><dd><tt>Draw&nbsp;c&nbsp;as&nbsp;a&nbsp;mountain-like&nbsp;thing&nbsp;onto&nbsp;Cairo&nbsp;context&nbsp;ctx.<br>
+x,y&nbsp;--&nbsp;topleft&nbsp;corner&nbsp;(actually&nbsp;the&nbsp;picture&nbsp;is&nbsp;lower,&nbsp;there&nbsp;is&nbsp;some&nbsp;whitespace)<br>
+size&nbsp;--&nbsp;width&nbsp;of&nbsp;the&nbsp;mountain<br>
+step&nbsp;--&nbsp;do&nbsp;not&nbsp;use&nbsp;that.</tt></dd></dl>
+ <dl><dt><a name="-drawStairs"><strong>drawStairs</strong></a>(c, ctx, x, y, size<font color="#909090">=0.9</font>, step<font color="#909090">=0</font>)</dt><dd><tt>Draw&nbsp;c&nbsp;as&nbsp;a&nbsp;tiled&nbsp;staircase&nbsp;onto&nbsp;Cairo&nbsp;context&nbsp;ctx.<br>
+x,y&nbsp;--&nbsp;topleft&nbsp;corner<br>
+size&nbsp;--&nbsp;width&nbsp;and&nbsp;height<br>
+step&nbsp;--&nbsp;do&nbsp;not&nbsp;use&nbsp;that.</tt></dd></dl>
+ <dl><dt><a name="-drawTree"><strong>drawTree</strong></a>(c, ctx, x<font color="#909090">=0</font>, y<font color="#909090">=0</font>, size<font color="#909090">=0.9</font>, angle<font color="#909090">=0</font>)</dt><dd><tt>Draw&nbsp;c&nbsp;as&nbsp;a&nbsp;(nonbinary)&nbsp;rooted&nbsp;tree&nbsp;onto&nbsp;Cairo&nbsp;context&nbsp;ctx.<br>
+x,y&nbsp;--&nbsp;topleft&nbsp;corner<br>
+size&nbsp;--&nbsp;width&nbsp;and&nbsp;height&nbsp;of&nbsp;the&nbsp;drawing&nbsp;are&nbsp;less&nbsp;than&nbsp;size&nbsp;and&nbsp;reasonably&nbsp;close&nbsp;to&nbsp;it<br>
+angle&nbsp;--&nbsp;0&nbsp;means&nbsp;the&nbsp;root&nbsp;is&nbsp;on&nbsp;top;&nbsp;other&nbsp;angle&nbsp;means&nbsp;the&nbsp;tree&nbsp;is&nbsp;rotated&nbsp;(radians).</tt></dd></dl>
+ <dl><dt><a name="-eq"><strong>eq</strong></a>(c1, c2)</dt><dd><tt>Tell&nbsp;if&nbsp;two&nbsp;<a href="#Catalan">Catalan</a>&nbsp;objects&nbsp;are&nbsp;equal.</tt></dd></dl>
+ <dl><dt><a name="-flip"><strong>flip</strong></a>(c)</dt><dd><tt>Flip&nbsp;the&nbsp;object,&nbsp;ie.&nbsp;flip&nbsp;horizontally&nbsp;the&nbsp;binary&nbsp;tree.</tt></dd></dl>
+ <dl><dt><a name="-flipRaised"><strong>flipRaised</strong></a>(c, left<font color="#909090">=True</font>)</dt><dd><tt>Flip&nbsp;the&nbsp;object&nbsp;on&nbsp;some&nbsp;stranger&nbsp;representation,&nbsp;ie.&nbsp;flip&nbsp;horizontally&nbsp;the&nbsp;mountain.<br>
+left&nbsp;--&nbsp;how&nbsp;are&nbsp;the&nbsp;mountains&nbsp;mapped&nbsp;to&nbsp;objects&nbsp;(do&nbsp;we&nbsp;start&nbsp;from&nbsp;raised&nbsp;mountain&nbsp;on&nbsp;left).</tt></dd></dl>
+ <dl><dt><a name="-generateCatalan"><strong>generateCatalan</strong></a>(size)</dt><dd><tt>Generate&nbsp;in&nbsp;<a href="#Catalan">Catalan</a>.generated&nbsp;a&nbsp;dictionary&nbsp;i&nbsp;-&gt;&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;of&nbsp;size&nbsp;i,&nbsp;for&nbsp;i&lt;=&nbsp;size.<br>
+Eg.&nbsp;<a href="#Catalan">Catalan</a>.generated[1]&nbsp;has&nbsp;1&nbsp;list&nbsp;member,&nbsp;[2]&nbsp;has&nbsp;2,&nbsp;[3]&nbsp;has&nbsp;5,&nbsp;[4]&nbsp;has&nbsp;14&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;WARNING:&nbsp;Too&nbsp;large&nbsp;size&nbsp;may&nbsp;make&nbsp;python&nbsp;unresponsive.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(For&nbsp;my&nbsp;computer,&nbsp;large&nbsp;=&nbsp;15&nbsp;and&nbsp;above.)</tt></dd></dl>
+ <dl><dt><a name="-getIndex"><strong>getIndex</strong></a>(c, col)</dt><dd><tt>Return&nbsp;the&nbsp;position&nbsp;of&nbsp;a&nbsp;given&nbsp;<a href="#Catalan">Catalan</a>&nbsp;object&nbsp;c&nbsp;in&nbsp;an&nbsp;array&nbsp;col&nbsp;or&nbsp;-1.<br>
+You&nbsp;probably&nbsp;don't&nbsp;need&nbsp;to&nbsp;use&nbsp;that.</tt></dd></dl>
+ <dl><dt><a name="-isFlip"><strong>isFlip</strong></a>(c1, c2)</dt><dd><tt>Tell&nbsp;if&nbsp;two&nbsp;objects&nbsp;are&nbsp;flips&nbsp;of&nbsp;each&nbsp;other.</tt></dd></dl>
+ <dl><dt><a name="-rtToText"><strong>rtToText</strong></a>(tree)</dt><dd><tt>Write&nbsp;the&nbsp;rooted&nbsp;tree&nbsp;as&nbsp;nested&nbsp;parentheses.</tt></dd></dl>
+ <dl><dt><a name="-split"><strong>split</strong></a>(c, left<font color="#909090">=True</font>)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;subtrees&nbsp;of&nbsp;a&nbsp;tree&nbsp;starting&nbsp;from&nbsp;a&nbsp;"spine".<br>
+left&nbsp;--&nbsp;left&nbsp;subtrees,&nbsp;spine&nbsp;on&nbsp;right.</tt></dd></dl>
+ <dl><dt><a name="-textBrackets"><strong>textBrackets</strong></a>(c)</dt><dd><tt>Write&nbsp;c&nbsp;as&nbsp;a&nbsp;sequence&nbsp;of&nbsp;nested&nbsp;brackets,&nbsp;eg.&nbsp;(()()).</tt></dd></dl>
+ <dl><dt><a name="-textBracketsWord"><strong>textBracketsWord</strong></a>(c)</dt><dd><tt>Write&nbsp;c&nbsp;as&nbsp;a&nbsp;sequence&nbsp;of&nbsp;bracketed&nbsp;characters&nbsp;(stars),&nbsp;eg.&nbsp;((*(**))*).</tt></dd></dl>
+ <dl><dt><a name="-textPermutation"><strong>textPermutation</strong></a>(c, plus<font color="#909090">=1</font>)</dt><dd><tt>Write&nbsp;c&nbsp;as&nbsp;a&nbsp;312-avoiding&nbsp;permutation,&nbsp;eg.&nbsp;231.<br>
+The&nbsp;permutation&nbsp;is&nbsp;based&nbsp;on&nbsp;c&nbsp;as&nbsp;binary&nbsp;tree&nbsp;(preorder).<br>
+plus&nbsp;--&nbsp;do&nbsp;not&nbsp;use&nbsp;that.</tt></dd></dl>
+ <dl><dt><a name="-treeBinary"><strong>treeBinary</strong></a>(c)</dt><dd><tt>Generate&nbsp;a&nbsp;binary&nbsp;tree&nbsp;structure&nbsp;from&nbsp;c.</tt></dd></dl>
+ <dl><dt><a name="-treeRooted"><strong>treeRooted</strong></a>(c)</dt><dd><tt>Generate&nbsp;a&nbsp;rooted&nbsp;tree&nbsp;structure&nbsp;from&nbsp;c.</tt></dd></dl>
+</td></tr></table>
+</body></html>
