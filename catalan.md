@@ -119,6 +119,10 @@ Generate in Catalan.generated a dictionary i -> a list of all objects of size i,
 ### isFlip(c1, c2)
 Tell if two objects are flips of each other.
 
+### redux(c):
+Return a smaller Catalan object, by representing `c` as bracketed word, remove the word and interpret the brackets as an object. Hard to explain, but I find it interesting.
+`c` — the original object.
+
 ### rtToText(tree)
 Write the rooted tree as nested parentheses.
 
@@ -126,6 +130,9 @@ Write the rooted tree as nested parentheses.
 Return a list of subtrees of a binary tree corresponding to `c` starting from a “spine”.
 
 `left` – if equal to `True`: left subtrees, spine on right.
+
+### subdivision(c,s=None)
+Generate non-crossing subdivision of set (more precisely: a list) `s` corresponding to `c`. Returns a list of lists. Size of `s` should be equal to `c.size`. If s is set to `None` or not given, it will be set to [0, 1, 2, 3, ..., n].
 
 ### textBrackets(c)
 Write `c` as a sequence of nested brackets, eg. `(()())`.
@@ -144,3 +151,7 @@ Generate a binary tree (a `BTree` object) from `c`.
 
 ### treeRooted(c)
 Generate a rooted tree (a `RTree` object) from `c`.
+
+### triangulation(c)
+Represent `c` as a polygon triangulation. Return a list of three-element lists of numbers, which represent vertices of the triangles. Tne polygon vertices are numbered 0, 1, …, n+1.
+`c` – the Catalan object

@@ -3,7 +3,12 @@ import cairo
 import math
 
 class Catalan:
-    """A class for Catalan numbers and various objects numbered by them."""
+    """A class for Catalan numbers and various objects numbered by them.
+    If we think of the object as a binary tree:
+    left, right -- subtrees
+    degl, degr -- lengths of straight left/right branches
+    size -- number of nodes
+    rootn -- number of root node in inorder numbering (starting from 1)."""
     generated=dict()
     """A place to keep already generated objects."""
     def __init__(self,l=None,r=None):
@@ -174,7 +179,48 @@ def textPermutation(c, plus=1):
         return ""
     t=str(textPermutation(c.left,plus+1))+" "+str(plus)+" "+str(textPermutation(c.right,plus+c.rootn))
     return t.lstrip().rstrip()
-#---
+
+def subdivision(c,s=None):
+    """Generate non-crossing subdivision of set s corresponding to c. Returns a list of lists.
+    Size of s should be equal to c.size. If s is set to None or not given,
+    it will be set to [0, 1, 2, 3, ..., n]."""
+    if (s==None):
+        s=range(c.size)
+    if (c==None):
+        return([])
+    if (c.size==1):
+        return([[s[0]]])
+    rn=c.rootn-1
+    sl=subdivision(c.left,s[0:rn])
+    sr=subdivision(c.right,s[rn+1:])
+    if (rn!=0):
+        sl[0].append(s[rn])
+        sl[0].sort()
+    else:
+        sl.append([s[0]])
+    sub=[]
+    for sd in sl:
+        sub.append(sd)
+    for sd in sr:
+        sub.append(sd)
+    sub.sort()
+    return sub
+
+def triangulation(c, plus=0):
+    """Represent c as a polygon triangulation. Return a list of three-element lists
+    of numbers, which represent vertices of the triangles. Tne polygon vertices are
+    numbered 0, 1, ..., n+1.
+    c -- the Catalan object."""
+    if(c==None):
+        return []
+    triangles=[[plus,c.rootn+plus,c.size+1+plus]]
+    for t in triangulation(c.left,plus):
+        triangles.append(t)
+    for t in triangulation(c.right,c.rootn+plus):
+        triangles.append(t)
+    return triangles
+    
+
 def eq(c1,c2):
     """Tell if two Catalan objects are equal."""
     if(c1==None):
@@ -275,6 +321,17 @@ def getIndex(c,col):
         if (eq(c,col[i])):
             return i
     return -1
+
+def redux(c):
+    """Return a smaller Catalan object, by representing c as bracketed word,
+    remove the word and interpret the brackets as an object. Hard to explain,
+    but I find it interesting.
+    c -- the original object."""
+    t=textBracketsWord(c)
+    t=t[1:-1]
+    t=t.replace("*","")
+    c0=catalanFromBrackets(t)
+    return c0
 
 def catalanFromBrackets(brk):
     """Reverse of textBrackets().
